@@ -4,7 +4,7 @@ run-name: ${{ github.actor }} - ${{ github.ref_name}} -${{ github.sha }}
 
 on:
   push:
-    branches: ["main"]
+    branches: ["main", "develop"]
   pull_request:
     branches: ["main"]
 
@@ -64,7 +64,6 @@ jobs:
 
   docker-ci:
     runs-on: ubuntu-latest
-    if: ${{ github.ref_name == 'main' }}
     needs: python-ci
     steps:
 
@@ -89,7 +88,6 @@ jobs:
 
   helm-ci:
     runs-on: ubuntu-latest
-    if: ${{ github.ref_name == 'main' }}
     needs: python-ci
     steps:
 
@@ -116,7 +114,7 @@ jobs:
           name: helm-package
           path: ./*.tgz
 
-          
+
 
 
 
