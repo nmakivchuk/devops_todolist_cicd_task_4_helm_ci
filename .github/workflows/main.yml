@@ -57,7 +57,6 @@ jobs:
           path: .
 
       - name: Upload helm artifacts
-        if: github.ref_name == 'main'
         uses: actions/upload-artifact@v4
         with:
           name: helm-artifacts
@@ -103,20 +102,20 @@ jobs:
         uses: azure/setup-helm@v4.2.0
 
       - name: Template Helm
-        run: helm template kube2py ./kube2py -f ./kube2py/values.yaml
+        run: helm template todoapp ./todoapp -f ./todoapp/values.yaml
 
       - name: Lint Helm
-        run: helm lint ./kube2py/
+        run: helm lint ./todoapp/
 
       - name: Package Helm
-        run: helm package ./kube2py/
+        run: helm package ./todoapp/
 
       - name: Upload Helm package
         uses: actions/upload-artifact@v4
         with:
           name: helm-package
           path: ./*.tgz
-          
+
 
 
 
